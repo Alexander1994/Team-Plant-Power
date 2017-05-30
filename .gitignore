@@ -1,0 +1,19 @@
+# IntelliJ
+/out/
+*.iml
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+
+# Other
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+
+# Java
+.gradle
+*.class
+*.log
+*.jar
