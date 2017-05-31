@@ -13,3 +13,4 @@ android:
 
 script:
 - chmod +x ./gradlew
+- ./gradlew assembleDebug
