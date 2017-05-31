@@ -2,8 +2,7 @@
 /out/
 *.iml
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
+.idea/
 
 # Other
 .DS_Store
