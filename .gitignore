@@ -10,9 +10,7 @@
 /captures
 .externalNativeBuild
 
-
 # Java
 .gradle
 *.class
 *.log
-*.jar
