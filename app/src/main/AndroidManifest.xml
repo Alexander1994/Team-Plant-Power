@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TemperatureDisplay" />
+        <activity android:name=".LightDisplay" />
+        <activity android:name=".HumidityDisplay"></activity>
     </application>
 
 </manifest>
