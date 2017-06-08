@@ -18,7 +18,7 @@ public class Temperature {
         }
         return false;
     }
-    public boolean setValue(double val){
+    public boolean setCelciusValue(double val){
         if (val <= maxRange &&
                 val >= minRange &&
                 !Double.isNaN(minRange) &&

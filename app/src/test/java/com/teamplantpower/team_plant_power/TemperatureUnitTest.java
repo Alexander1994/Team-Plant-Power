@@ -14,25 +14,25 @@ public class TemperatureUnitTest {
     @Test
     public void rangeIsNotSetBeforeValue() throws Exception {
         Temperature t = new Temperature();
-        assertEquals(t.setValue(20), false);
+        assertEquals(t.setCelciusValue(20), false);
     }
     @Test
     public void valueIsBeyondMax() throws Exception {
         Temperature t = new Temperature();
         t.setRange(10,30);
-        assertEquals(t.setValue(40), false);
+        assertEquals(t.setCelciusValue(40), false);
     }
     @Test
     public void valueIsLessThanMin() throws Exception {
         Temperature t = new Temperature();
         t.setRange(10,30);
-        assertEquals(t.setValue(5), false);
+        assertEquals(t.setCelciusValue(5), false);
     }
     @Test
     public void farenheitConversionOfTemperature() throws Exception {
         Temperature t = new Temperature();
         t.setRange(10, 30);
-        t.setValue(20);
+        t.setCelciusValue(20);
         assertEquals(t.getFarenheitValue() == 68, true);
     }
 }
