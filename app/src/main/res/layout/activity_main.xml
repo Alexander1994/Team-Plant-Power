@@ -14,24 +14,46 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/message"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/title_home" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/humidityButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="46dp"
+                android:layout_weight="1"
+                android:onClick="loadHumidity"
+                android:text="Humidity" />
+
+            <Button
+                android:id="@+id/lightButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/humidityButton"
+                android:layout_alignStart="@+id/humidityButton"
+                android:layout_below="@+id/humidityButton"
+                android:layout_weight="1"
+                android:onClick="loadLight"
+                android:text="Light" />
+
+            <Button
+                android:id="@+id/temperatureButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/lightButton"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/lightButton"
+                android:layout_marginBottom="65dp"
+                android:layout_weight="1"
+                android:onClick="loadTemperature"
+                android:text="Temperature" />
+        </LinearLayout>
 
     </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+    
 
 </LinearLayout>
