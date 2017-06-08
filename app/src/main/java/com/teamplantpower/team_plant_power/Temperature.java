@@ -18,16 +18,19 @@ public class Temperature {
         }
         return false;
     }
-    public boolean setCelciusValue(double val){
-        if (val <= maxRange &&
-                val >= minRange &&
-                !Double.isNaN(minRange) &&
-                !Double.isNaN(maxRange)) {
-            celciusValue = val;
-            return true;
-        }
-        return false;
+    public void setCelciusValue(double val){
+        celciusValue = val;
     }
+    public boolean isInRange() {
+        return celciusValue <= maxRange &&
+                celciusValue >= minRange &&
+                !Double.isNaN(minRange) &&
+                !Double.isNaN(maxRange);
+    }
+    public boolean isCelciusValueSet() {
+        return !Double.isNaN(celciusValue);
+    }
+
     public double getFarenheitValue() {
         return celciusValue * 1.8 + 32;
     }
