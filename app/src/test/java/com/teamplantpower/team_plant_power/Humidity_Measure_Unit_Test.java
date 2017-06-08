@@ -3,7 +3,7 @@ package com.teamplantpower.team_plant_power;
 import org.junit.Test;
 import org.junit.Before;
 
-import static com.teamplantpower.team_plant_power.HumidityMeasure.*;
+//import static com.teamplantpower.team_plant_power.HumidityMeasure.*;
 import static org.junit.Assert.*;
 
 /**
@@ -30,37 +30,36 @@ public class Humidity_Measure_Unit_Test {
     }
     @Test
     public void checkHumidityIsValid() throws Exception{
-        //Cheeck humidity >= 0 and <= 100
-        assertFalse(validateHumidity(humidityMeasure1));
-        assertFalse(validateHumidity(humidityMeasure2));
-        assertTrue(validateHumidity(humidityMeasure3));
-        assertTrue(validateHumidity(humidityMeasure4));
-        assertTrue(validateHumidity(humidityMeasure5));
-        assertTrue(validateHumidity(humidityMeasure6));
+        //Test to ensure humidity >= 0 and <= 100
+        assertFalse(humidityMeasure1.validateHumidity());
+        assertFalse(humidityMeasure2.validateHumidity());
+        assertTrue(humidityMeasure3.validateHumidity());
+        assertTrue(humidityMeasure4.validateHumidity());
+        assertTrue(humidityMeasure5.validateHumidity());
+        assertTrue(humidityMeasure6.validateHumidity());
     }
     @Test
     public void checkRangeIsValid() throws Exception{
-        //This is to test the the minRange is less than or equal to maxRange
-        //Check minRange >=0 and maxRange <=100
-        assertFalse(validateHumidityRange(humidityMeasure1));
-        assertFalse(validateHumidityRange(humidityMeasure2));
-        assertTrue(validateHumidityRange(humidityMeasure3));
-        assertFalse(validateHumidityRange(humidityMeasure4));
-        assertTrue(validateHumidityRange(humidityMeasure5));
-        assertTrue(validateHumidityRange(humidityMeasure6));
+        //Test to ensure minRange is less than or equal to maxRange and minRange >=0 and maxRange <=100
+        assertFalse(humidityMeasure1.validateHumidityRange());
+        assertFalse(humidityMeasure2.validateHumidityRange());
+        assertTrue(humidityMeasure3.validateHumidityRange());
+        assertFalse(humidityMeasure4.validateHumidityRange());
+        assertTrue(humidityMeasure5.validateHumidityRange());
+        assertTrue(humidityMeasure6.validateHumidityRange());
 
 
 
     }
     @Test
     public void checkHumidityWithinRange()throws Exception{
-        //Check that the current humidity is within the given range
-        assertFalse(checkHumidityInRange(humidityMeasure1));
-        assertFalse(checkHumidityInRange(humidityMeasure2));
-        assertFalse(checkHumidityInRange(humidityMeasure3));
-        assertFalse(checkHumidityInRange(humidityMeasure4));
-        assertTrue(checkHumidityInRange(humidityMeasure5));
-        assertTrue(checkHumidityInRange(humidityMeasure6));
+        //Test to ensure that the current humidity is within the given range
+        assertFalse(humidityMeasure1.checkHumidityInRange());
+        assertFalse(humidityMeasure2.checkHumidityInRange());
+        assertFalse(humidityMeasure3.checkHumidityInRange());
+        assertFalse(humidityMeasure4.checkHumidityInRange());
+        assertTrue(humidityMeasure5.checkHumidityInRange());
+        assertTrue(humidityMeasure6.checkHumidityInRange());
 
     }
 
