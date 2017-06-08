@@ -10,9 +10,16 @@ public class Temperature {
         celciusValue = Double.NaN;
     }
 
-    public boolean setRange(double min, double max) {
-        if (min <= max) {
+    // Sets
+    public boolean setMinRange(double min) {
+        if (min<= maxRange || Double.isNaN(maxRange)) {
             minRange = min;
+            return true;
+        }
+        return false;
+    }
+    public boolean setMaxRange(double max) {
+        if (max >= minRange || Double.isNaN(minRange)) {
             maxRange = max;
             return true;
         }
@@ -21,6 +28,8 @@ public class Temperature {
     public void setCelciusValue(double val){
         celciusValue = val;
     }
+
+    // Checks
     public boolean isInRange() {
         return celciusValue <= maxRange &&
                 celciusValue >= minRange &&
@@ -30,11 +39,21 @@ public class Temperature {
     public boolean isCelciusValueSet() {
         return !Double.isNaN(celciusValue);
     }
+    public boolean isRangeSet() {
+        return !Double.isNaN(minRange) && !Double.isNaN(maxRange);
+    }
 
+    // Gets
     public double getFarenheitValue() {
         return celciusValue * 1.8 + 32;
     }
     public double getCelciusValue() {
         return celciusValue;
+    }
+    public double getMinRange() {
+        return minRange;
+    }
+    public double getMaxRange() {
+        return maxRange;
     }
 }
