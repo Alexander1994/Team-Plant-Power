@@ -14,4 +14,15 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+    @Test
+    public void dbTest() throws Exception {
+        Database d = new Database();
+        for (int i=0; i < 40; i++) {
+            double h = d.getHumidityData(), l = d.getLightData(), t=d.getTemperatureData();
+            assertEquals(h <= 100.0 && h>=0, true);
+            assertEquals(l <= 100.0 && l>=0, true);
+            assertEquals(t <= 30.0 && t>=0, true);
+        }
+
+    }
 }
