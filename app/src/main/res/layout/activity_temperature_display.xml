@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.teamplantpower.team_plant_power.TemperatureDisplay">
+
+    <TextView
+        android:id="@+id/temperatureTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Temperature"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="33dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/celsius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'C"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="356dp"
+        android:layout_marginLeft="177dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'C"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="356dp"
+        app:layout_constraintLeft_toRightOf="@+id/celsius"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'C"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="105dp"
+        app:layout_constraintLeft_toRightOf="@+id/celciusValue"
+        android:layout_marginLeft="187dp" />
+
+    <TextView
+        android:id="@+id/fahrenheit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'F"
+        app:layout_constraintLeft_toRightOf="@+id/textView2"
+        android:layout_marginLeft="187dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="151dp" />
+
+    <TextView
+        android:id="@+id/celciusValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/value_celsius"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="105dp"
+        android:layout_marginLeft="73dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/value_fahrenheit"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="151dp"
+        android:layout_marginLeft="65dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_refresh"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="217dp" />
+
+    <EditText
+        android:id="@+id/setMaxTemp"
+        android:layout_width="108dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="@string/value_set_max"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="339dp"
+        app:layout_constraintLeft_toRightOf="@+id/setMinTemp"
+        android:layout_marginLeft="73dp" />
+
+    <EditText
+        android:id="@+id/setMinTemp"
+        android:layout_width="108dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="@string/value_set_min"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="339dp"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_set"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="429dp" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="293dp"
+        android:text="Set min and max temperature:"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="33dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

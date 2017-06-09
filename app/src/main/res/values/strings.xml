@@ -3,4 +3,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="value_celsius">30</string>
+    <string name="value_fahrenheit">100</string>
+    <string name="button_refresh">Refresh</string>
+    <string name="value_light">57</string>
+    <string name="value_humidity">70</string>
+    <string name="button_set">Set</string>
+    <string name="value_set_min">Min</string>
+    <string name="value_set_max">Max</string>
 </resources>
