@@ -25,6 +25,10 @@ public class Temperature {
         }
         return false;
     }
+    public void resetRange() {
+        minRange = Double.NaN;
+        maxRange = Double.NaN;
+    }
     public void setCelciusValue(double val){
         celciusValue = val;
     }

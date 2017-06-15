@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+/*
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-    };
+    };*/
     /**
      * Called when the user taps the Humidity button
      * @param view The current view.
