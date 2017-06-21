@@ -11,4 +11,6 @@
     <string name="button_set">Set</string>
     <string name="value_set_min">Min</string>
     <string name="value_set_max">Max</string>
+    <string name="text_degree_c">°C</string>
+    <string name="text_degree_f">°F</string>
 </resources>

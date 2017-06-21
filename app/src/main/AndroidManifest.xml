@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.teamplantpower.activities.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,23 +18,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TemperatureDisplay" android:parentActivityName=".MainActivity" >
+        <activity android:name="com.teamplantpower.activities.TemperatureDisplay" android:parentActivityName="com.teamplantpower.activities.MainActivity" >
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.teamplantpower.activities.MainActivity" />
         </activity>
-        <activity android:name=".LightDisplay" android:parentActivityName=".MainActivity" >
+        <activity android:name="com.teamplantpower.activities.LightDisplay" android:parentActivityName="com.teamplantpower.activities.MainActivity" >
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.teamplantpower.activities.MainActivity" />
         </activity>
-        <activity android:name=".HumidityDisplay" android:parentActivityName=".MainActivity" >
+        <activity android:name="com.teamplantpower.activities.HumidityDisplay" android:parentActivityName="com.teamplantpower.activities.MainActivity" >
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.teamplantpower.activities.MainActivity" />
         </activity>
     </application>
 

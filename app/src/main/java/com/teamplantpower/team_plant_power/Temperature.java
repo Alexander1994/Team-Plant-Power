@@ -4,7 +4,7 @@ package com.teamplantpower.team_plant_power;
 public class Temperature {
     double minRange, maxRange, celciusValue;
 
-    Temperature() {
+    public Temperature() {
         minRange = Double.NaN;
         maxRange = Double.NaN;
         celciusValue = Double.NaN;

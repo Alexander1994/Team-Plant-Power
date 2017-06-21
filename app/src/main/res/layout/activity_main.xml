@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.teamplantpower.team_plant_power.MainActivity">
+    tools:context="com.teamplantpower.activities.MainActivity">
 
     <FrameLayout
         android:id="@+id/content"

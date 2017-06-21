@@ -1,4 +1,4 @@
-package com.teamplantpower.team_plant_power;
+package com.teamplantpower.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.teamplantpower.team_plant_power.Database;
+import com.teamplantpower.team_plant_power.HumidityMeasure;
+import com.teamplantpower.team_plant_power.R;
 
 public class HumidityDisplay extends AppCompatActivity {
     //UI Elements
@@ -31,7 +35,7 @@ public class HumidityDisplay extends AppCompatActivity {
         humidityExposureValue = (TextView) findViewById(R.id.humidityExposureValue);
         setMinHumidity = (EditText) findViewById(R.id.setMinHumidity);
         setMaxHumidity = (EditText) findViewById(R.id.setMaxHumidity);
-        setMin_MaxHumidity = (Button) findViewById(R.id.setMin_MaxHumidity);
+        setMin_MaxHumidity = (Button) findViewById(R.id.setHumidity);
         message = (TextView) findViewById(R.id.message);
         //Display Current Humidity Exposure Values on UI
         humidityExposureValue.setText(Double.toString(humidity_exposure.getHumidity()));

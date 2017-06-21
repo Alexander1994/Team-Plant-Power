@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.teamplantpower.activities.MainActivity;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -17,7 +19,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.pressImeActionButton;
@@ -54,7 +55,7 @@ public class TemperatureUITest {
         appCompatEditText3.perform(pressImeActionButton());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.button6), isDisplayed()));
+                allOf(withId(R.id.setTemperature), isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction editText = onView(
