@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.teamplantpower.activities.MainActivity;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -45,7 +47,7 @@ public class LightExposureUITest {
         appCompatEditText1.perform(replaceText("0.000001"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.setMin_MaxLight), isDisplayed()));
+                allOf(withId(R.id.setLight), isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction textView = onView(
@@ -57,7 +59,7 @@ public class LightExposureUITest {
         appCompatEditText2.perform(replaceText("100.00000"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.setMin_MaxLight), isDisplayed()));
+                allOf(withId(R.id.setLight), isDisplayed()));
         appCompatButton3.perform(click());
 
         ViewInteraction textView2 = onView(
@@ -69,7 +71,7 @@ public class LightExposureUITest {
         appCompatEditText3.perform(replaceText("101"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton4 = onView(
-                allOf(withId(R.id.setMin_MaxLight), isDisplayed()));
+                allOf(withId(R.id.setLight), isDisplayed()));
         appCompatButton4.perform(click());
 
         ViewInteraction textView3 = onView(
@@ -89,7 +91,7 @@ public class LightExposureUITest {
         appCompatEditText6.perform(replaceText("40.2"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton5 = onView(
-                allOf(withId(R.id.setMin_MaxLight), isDisplayed()));
+                allOf(withId(R.id.setLight), isDisplayed()));
         appCompatButton5.perform(click());
 
         ViewInteraction textView4 = onView(

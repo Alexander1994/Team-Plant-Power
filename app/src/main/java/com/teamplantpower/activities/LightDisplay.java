@@ -1,4 +1,4 @@
-package com.teamplantpower.team_plant_power;
+package com.teamplantpower.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.teamplantpower.team_plant_power.Database;
+import com.teamplantpower.team_plant_power.Light_UI;
+import com.teamplantpower.team_plant_power.R;
 
 public class LightDisplay extends AppCompatActivity {
     //UI Elements
@@ -30,7 +34,7 @@ public class LightDisplay extends AppCompatActivity {
         lightExposureValue = (TextView) findViewById(R.id.lightExposureValue);
         setMinLight = (EditText) findViewById(R.id.setMinLight);
         setMaxLight = (EditText) findViewById(R.id.setMaxLight);
-        setMin_MaxLight = (Button) findViewById(R.id.setMin_MaxLight);
+        setMin_MaxLight = (Button) findViewById(R.id.setLight);
         message = (TextView) findViewById(R.id.message);
         //Display Current Light Exposure Values on UI
         lightExposureValue.setText(Double.toString(light_exposure.getlight()));

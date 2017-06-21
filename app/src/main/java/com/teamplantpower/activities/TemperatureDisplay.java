@@ -1,12 +1,15 @@
-package com.teamplantpower.team_plant_power;
+package com.teamplantpower.activities;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.teamplantpower.team_plant_power.Database;
+import com.teamplantpower.team_plant_power.R;
+import com.teamplantpower.team_plant_power.Temperature;
 
 public class TemperatureDisplay extends AppCompatActivity {
 
@@ -23,7 +26,7 @@ public class TemperatureDisplay extends AppCompatActivity {
     public void refreshValues(View v) {
         Database db = new Database();
         TextView celciusValue = (TextView) findViewById(R.id.celciusValue);
-        TextView farenheitValue = (TextView) findViewById(R.id.textView2);
+        TextView farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
         temperatureUI.setCelciusValue(db.getTemperatureData());
         celciusValue.setText(Double.toString(temperatureUI.getCelciusValue()));
         farenheitValue.setText(Double.toString(temperatureUI.getFarenheitValue()));
