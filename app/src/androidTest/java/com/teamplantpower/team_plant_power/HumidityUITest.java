@@ -15,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
+import com.teamplantpower.activities.MainActivity;
+
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -53,7 +55,7 @@ import static org.hamcrest.Matchers.allOf;
             appCompatEditText1.perform(replaceText("0.000001"), closeSoftKeyboard());
 
             ViewInteraction appCompatButton2 = onView(
-                    allOf(withId(R.id.setMin_MaxHumidity), isDisplayed()));
+                    allOf(withId(R.id.setHumidity), isDisplayed()));
             appCompatButton2.perform(click());
 
             ViewInteraction textView = onView(
@@ -65,7 +67,7 @@ import static org.hamcrest.Matchers.allOf;
             appCompatEditText2.perform(replaceText("100.00000"), closeSoftKeyboard());
 
             ViewInteraction appCompatButton3 = onView(
-                    allOf(withId(R.id.setMin_MaxHumidity), isDisplayed()));
+                    allOf(withId(R.id.setHumidity), isDisplayed()));
             appCompatButton3.perform(click());
 
             ViewInteraction textView2 = onView(
@@ -77,7 +79,7 @@ import static org.hamcrest.Matchers.allOf;
             appCompatEditText3.perform(replaceText("101"), closeSoftKeyboard());
 
             ViewInteraction appCompatButton4 = onView(
-                    allOf(withId(R.id.setMin_MaxHumidity), isDisplayed()));
+                    allOf(withId(R.id.setHumidity), isDisplayed()));
             appCompatButton4.perform(click());
 
             ViewInteraction textView3 = onView(
@@ -97,7 +99,7 @@ import static org.hamcrest.Matchers.allOf;
             appCompatEditText6.perform(replaceText("40.2"), closeSoftKeyboard());
 
             ViewInteraction appCompatButton5 = onView(
-                    allOf(withId(R.id.setMin_MaxHumidity), isDisplayed()));
+                    allOf(withId(R.id.setHumidity), isDisplayed()));
             appCompatButton5.perform(click());
 
             ViewInteraction textView4 = onView(
