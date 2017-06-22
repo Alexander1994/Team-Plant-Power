@@ -8,6 +8,7 @@ android:
     - android-25
 
     # Support library
+    - extra-google-google_play_services
     - extra-android-support
     - extra-android-m2repository
 
