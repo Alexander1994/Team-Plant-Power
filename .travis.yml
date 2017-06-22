@@ -23,5 +23,7 @@ before_script:
 script:
 - ./gradlew test
 
-after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
+
+deploy:
+  provider: firebase
+  token: 1/BNpJHyJfVWKskWVuvBEv64WX7ocB1UvWJ0FwpoadzMc
