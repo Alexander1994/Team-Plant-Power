@@ -3,6 +3,10 @@ package com.teamplantpower.team_plant_power;
 
 import java.util.Random;
 
+/**
+ * Class for creating random numbers as data to store in database
+ * To be removed once data is retrieved from hexiwear device.
+ */
 public class Database {
     private static Random r = new Random();
     public double getLightData() {
