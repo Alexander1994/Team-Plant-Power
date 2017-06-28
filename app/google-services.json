@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "785086875463",
+    "firebase_url": "https://team-plant-power.firebaseio.com",
+    "project_id": "team-plant-power",
+    "storage_bucket": "team-plant-power.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785086875463:android:3ea2ff0736e3b673",
+        "android_client_info": {
+          "package_name": "com.teamplantpower.team_plant_power"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785086875463-r0pjq670ajgi1ahvic12jc1oj64dmflr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamplantpower.team_plant_power",
+            "certificate_hash": "3e97c3b0bc825c53be9771d2c617ae0dd0208946"
+          }
+        },
+        {
+          "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOrpGQCUifpnOlWGMA-7qHGFygzJ4UE1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
