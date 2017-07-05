@@ -1,11 +1,14 @@
 package com.teamplantpower.activities;
 
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.R;
@@ -17,12 +20,15 @@ public class TemperatureDisplay extends AppCompatActivity {
     private Temperature temperatureUI;
     private Range temperatureRange;
 
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference firebaseReference = database.getReference("range");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature_display);
         temperatureUI = new Temperature();
-        temperatureRange = new Range(0,100);
+        temperatureRange = new Range("temperature", 0,100);
 
 
     }
@@ -64,7 +70,10 @@ public class TemperatureDisplay extends AppCompatActivity {
                 maximumValue.setText("Max");
                 temperatureRange.resetRange();
             }
+            firebaseReference.child(temperatureRange.getType()).setValue(temperatureRange);
+
         }
+
 
     }
 }
