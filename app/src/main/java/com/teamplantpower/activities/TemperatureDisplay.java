@@ -9,17 +9,21 @@ import android.widget.TextView;
 
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.R;
+import com.teamplantpower.team_plant_power.Range;
 import com.teamplantpower.team_plant_power.Temperature;
 
 public class TemperatureDisplay extends AppCompatActivity {
 
     private Temperature temperatureUI;
+    private Range temperatureRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_temperature_display);
         temperatureUI = new Temperature();
+        temperatureRange = new Range(0,100);
+
 
     }
 
@@ -31,7 +35,7 @@ public class TemperatureDisplay extends AppCompatActivity {
         celciusValue.setText(Double.toString(temperatureUI.getCelciusValue()));
         farenheitValue.setText(Double.toString(temperatureUI.getFarenheitValue()));
 
-        if (temperatureUI.isRangeSet() && !temperatureUI.isInRange()) {
+        if (temperatureRange.isRangeSet() && !temperatureRange.isInRange(temperatureUI.getCelciusValue())) {
             farenheitValue.setTextColor(Color.parseColor("#FF0000"));
             celciusValue.setTextColor(Color.parseColor("#FF0000"));
 
@@ -50,13 +54,15 @@ public class TemperatureDisplay extends AppCompatActivity {
         String minString = minimumValue.getText().toString();
 
         if (!maxString.equals("Max") && !minString.equals("Min")) {
-
-            boolean isRangeSet = temperatureUI.setMaxRange(Double.parseDouble(maxString)) &&
-                    temperatureUI.setMinRange(Double.parseDouble(minString));
-            if (!isRangeSet)  {
+            Range newRange = new Range("Temperature", Double.parseDouble(minString), Double.parseDouble(maxString));
+            if(newRange.validateRange()){
+                temperatureRange.setMinRange(newRange.getMinRange());
+                temperatureRange.setMaxRange(newRange.getMaxRange());
+            }
+            else{
                 minimumValue.setText("Min");
                 maximumValue.setText("Max");
-                temperatureUI.resetRange();
+                temperatureRange.resetRange();
             }
         }
 

@@ -65,8 +65,6 @@ public class TemperatureUITest {
         ViewInteraction editText2 = onView(
                 allOf(withId(R.id.setMaxTemp), isDisplayed()));
         editText2.check(matches(withText("Max")));
-
-
     }
 
     private static Matcher<View> childAtPosition(

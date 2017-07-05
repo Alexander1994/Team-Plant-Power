@@ -1,126 +1,87 @@
 package com.teamplantpower.team_plant_power;
 
-/**
- * Class for representing a temperature value and its range
- * @author Alexander/Mishal
- *
- */
-public class Temperature {
-    /**
-     * Instance Variables
-     * celciusValue represents the temperature in Celsius can be read and wrote to using getters and setters
-     * minRange represents the minimum temperature can be read and wrote to using getters and setters
-     * maxRange represents the maximum temperature can be read and wrote to using getters and setters
-     */
-    double minRange, maxRange, celciusValue;
+
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Temperature implements Serializable {
+    private String tID;
+    private double celciusValue;
 
     /**
-     * Temperature Constructor
+     * Default constructor
      */
     public Temperature() {
-        minRange = Double.NaN;
-        maxRange = Double.NaN;
+        tID = "";
         celciusValue = Double.NaN;
     }
 
     /**
-     * Method to set the minimum range of the temperature value
-     * @param min the value to set the minimum temperature range to
-     * @return a boolean to indicate if the minimum temperature range was successfully set
+     * Constructor that takes an id and the temperature value in celcius
+     * @param tID   A string, the timestamp id.
+     * @param celciusValue  The celcius value.
      */
-    public boolean setMinRange(double min) {
-        if (min<= maxRange || Double.isNaN(maxRange)) {
-            minRange = min;
-            return true;
-        }
-        return false;
+    public Temperature(String tID, double celciusValue) {
+        this.tID = tID;
+        this.celciusValue = celciusValue;
     }
 
-    /**
-     * Method to set the maximum range of the temperature value
-     * @param max the value to set the maximum temperature range to
-     * @return a boolean to indicate if the maximum temperature range was successfully set
-     */
-    public boolean setMaxRange(double max) {
-        if (max >= minRange || Double.isNaN(minRange)) {
-            maxRange = max;
-            return true;
-        }
-        return false;
-    }
 
+    //Setters******************************************************************
     /**
-     * Method to reset the minimum and maximum temperature ranges
-     */
-    public void resetRange() {
-        minRange = Double.NaN;
-        maxRange = Double.NaN;
-    }
-
-    /**
-     * Method to set the temperature value in celsius
-     * @param val the temperature value to set to
+     * Set the celcius value
+     * @param val the celcius value to set
      */
     public void setCelciusValue(double val){
         celciusValue = val;
     }
 
     /**
-     * Method to check if the temperature is within the minimum and maximum temperature range set
-     * @return boolean to indicate if the temperature is currently in range
+     * Set the timestamp id value
+     * @param tID the id value to set
      */
-    public boolean isInRange() {
-        return celciusValue <= maxRange &&
-                celciusValue >= minRange &&
-                !Double.isNaN(minRange) &&
-                !Double.isNaN(maxRange);
-    }
+    public void settID(String tID) {this.tID = tID;}
 
-    /**
-     * Method to check if the celsius temperature value has been set
-     * @return boolean ture if it has been set
-     */
-    public boolean isCelciusValueSet() {
-        return !Double.isNaN(celciusValue);
-    }
 
-    /**
-     * Method to check if the maximum and minimum temperature range value has been set
-     * @return
-     */
-    public boolean isRangeSet() {
-        return !Double.isNaN(minRange) && !Double.isNaN(maxRange);
-    }
 
+    //Getters******************************************************************
     /**
-     * Method to get the temperature value in Fahrenheit
-     * @return Fahrenheit temperature value
+     * Converts the celcius value to fahrenheit
+     * @return  A fahrenheit value.
      */
+    @Exclude
     public double getFarenheitValue() {
         return celciusValue * 1.8 + 32;
     }
 
     /**
-     * Method to get the temperature value in celsius
-     * @return Celsius temperature value
+     * Get the celcius value
+     * @return  The celcius value
      */
     public double getCelciusValue() {
         return celciusValue;
     }
 
     /**
-     * Method to get the currently set minimum temperature range
-     * @return value of minimum temperature range
+     * Get the id
+     * @return  The temperature timestamp id
      */
-    public double getMinRange() {
-        return minRange;
-    }
+    public String gettID() {return tID;}
 
     /**
-     * Method to get the currently set maximum temperature range
-     * @return value of the maximum temperature range
+     * Convert object to hashmap
+     * @return A hashmap
      */
-    public double getMaxRange() {
-        return maxRange;
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("tID", tID);
+        result.put("celciusValue", celciusValue);
+        return result;
     }
+
+
 }
