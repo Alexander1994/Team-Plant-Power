@@ -34,7 +34,7 @@ public class HumidityDisplay extends AppCompatActivity {
         //Initialize Database and Humidity Exposure Objects
         data = new Database();
         humidity_exposure = new Humidity(data.getHumidityData());
-        humidityRange = new Range("humidity", 25,30);
+        humidityRange = new Range("humidity", 0,100);
 
         //Initialze UI elements
         humidityExposureValue = (TextView) findViewById(R.id.humidityExposureValue);

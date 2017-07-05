@@ -32,7 +32,7 @@ public class LightDisplay extends AppCompatActivity {
         //Initialize Database and Light Exposure Objects
         data = new Database();
         light_exposure = new Light(data.getLightData());
-        lightRange = new Range("humidity", 25,30);//default values
+        lightRange = new Range("humidity", 0,100);//default values
 
         //Initialze UI elements
         lightExposureValue = (TextView) findViewById(R.id.lightExposureValue);
