@@ -21,7 +21,7 @@ public class TemperatureDisplay extends AppCompatActivity {
     private Range temperatureRange;
 
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference firebaseReference = database.getReference("range");
+    DatabaseReference firebaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,14 @@ public class TemperatureDisplay extends AppCompatActivity {
     }
 
     public void refreshValues(View v) {
-        Database db = new Database();
+        //get from DB
+        firebaseReference = database.getReference("currentTemperature");
+
+
+        //set text
         TextView celciusValue = (TextView) findViewById(R.id.celciusValue);
         TextView farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
-        temperatureUI.setCelciusValue(db.getTemperatureData());
+        temperatureUI.setCelciusValue();
         celciusValue.setText(Double.toString(temperatureUI.getCelciusValue()));
         farenheitValue.setText(Double.toString(temperatureUI.getFarenheitValue()));
 
@@ -70,6 +74,7 @@ public class TemperatureDisplay extends AppCompatActivity {
                 maximumValue.setText("Max");
                 temperatureRange.resetRange();
             }
+            firebaseReference = database.getReference("range");
             firebaseReference.child(temperatureRange.getType()).setValue(temperatureRange);
 
         }
