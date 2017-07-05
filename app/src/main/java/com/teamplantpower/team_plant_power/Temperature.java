@@ -1,7 +1,13 @@
 package com.teamplantpower.team_plant_power;
 
 
-public class Temperature {
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Temperature implements Serializable {
     private String tID;
     private double celciusValue;
 
@@ -46,6 +52,7 @@ public class Temperature {
      * Converts the celcius value to fahrenheit
      * @return  A fahrenheit value.
      */
+    @Exclude
     public double getFarenheitValue() {
         return celciusValue * 1.8 + 32;
     }
@@ -63,6 +70,18 @@ public class Temperature {
      * @return  The temperature timestamp id
      */
     public String gettID() {return tID;}
+
+    /**
+     * Convert object to hashmap
+     * @return A hashmap
+     */
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("tID", tID);
+        result.put("celciusValue", celciusValue);
+        return result;
+    }
 
 
 }

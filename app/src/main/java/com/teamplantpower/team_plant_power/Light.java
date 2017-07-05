@@ -1,10 +1,16 @@
 package com.teamplantpower.team_plant_power;
 
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Mishal on 08/06/2017.
  */
 
-public class Light {
+public class Light implements Serializable {
     String lID;
     double percentLight;
 
@@ -60,11 +66,28 @@ public class Light {
 
 
     //Validation******************************************************************
+    /**
+     * Check whether light is a valid value.
+     * @return  A boolean, true if it's between 0 and 100, false otherwise.
+     */
+    @Exclude
     public boolean validateLight(){
         if(this.percentLight < 0 || this.percentLight > 100)
             return false;
         else
             return true;
+    }
+
+    /**
+     * Convert object to hashmap
+     * @return A hashmap
+     */
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("lID", lID);
+        result.put("percentLight", percentLight);
+        return result;
     }
 
  }

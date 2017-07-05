@@ -1,10 +1,14 @@
 package com.teamplantpower.team_plant_power;
 
+import com.google.firebase.database.Exclude;
+
+import java.io.Serializable;
+
 /**
  * Created by Samantha on 2017-07-04.
  */
 
-public class Range {
+public class Range implements Serializable {
     private String type;
     private double minRange, maxRange;
 
@@ -95,6 +99,7 @@ public class Range {
     /**
      * Resets the range. Sets min and max to NULL.
      */
+    @Exclude
     public void resetRange() {
         minRange = Double.NaN;
         maxRange = Double.NaN;
@@ -106,6 +111,7 @@ public class Range {
      * Validate that the ranges are between 0 and 100 (for light and humidity) and do not overlap
      * @return A boolean, true if valid, false otherwise
      */
+    @Exclude
     public boolean validateRange(){
         boolean inRange = true;
         //for light and humidity
@@ -125,6 +131,7 @@ public class Range {
      * Checks whether range is set.
      * @return True if range is set, false otherwise
      */
+    @Exclude
     public boolean isRangeSet() {
         return !Double.isNaN(minRange) && !Double.isNaN(maxRange);
     }
@@ -135,12 +142,15 @@ public class Range {
      * @param value The value to check
      * @return A boolean. True if in range, false otherwise.
      */
+    @Exclude
     public boolean isInRange(double value){
         if(value >= minRange && value<= maxRange)
             return true;
         else
             return false;
     }
+
+
 
 
 
