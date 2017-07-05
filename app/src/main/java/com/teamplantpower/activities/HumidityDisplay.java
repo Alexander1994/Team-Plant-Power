@@ -7,6 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.Humidity;
 import com.teamplantpower.team_plant_power.R;
@@ -15,6 +20,7 @@ import com.teamplantpower.team_plant_power.Range;
 
 public class HumidityDisplay extends AppCompatActivity {
     //UI Elements
+    private static String TAG = "HumidityDisplay";
     TextView humidityExposureValue;
     Button refreshHumidityExposure;
     EditText setMinHumidity;
@@ -23,6 +29,8 @@ public class HumidityDisplay extends AppCompatActivity {
     TextView message;
     //Datebase and Humidity Exposure Objects
     Database data;
+    FirebaseDatabase db = FirebaseDatabase.getInstance();
+    DatabaseReference ref = db.getReference("currentHumidity");
     Humidity humidity_exposure;
     Range humidityRange;
 
@@ -34,8 +42,6 @@ public class HumidityDisplay extends AppCompatActivity {
         //Initialize Database and Humidity Exposure Objects
         data = new Database();
         humidity_exposure = new Humidity(data.getHumidityData());
-        humidityRange = new Range("humidity", 0,100);
-
         //Initialze UI elements
         humidityExposureValue = (TextView) findViewById(R.id.humidityExposureValue);
         setMinHumidity = (EditText) findViewById(R.id.setMinHumidity);
@@ -43,9 +49,29 @@ public class HumidityDisplay extends AppCompatActivity {
         setMin_MaxHumidity = (Button) findViewById(R.id.setHumidity);
         message = (TextView) findViewById(R.id.message);
         //Display Current Humidity Exposure Values on UI
+        humidityRange = new Range("humidity", 0,100);
         humidityExposureValue.setText(Double.toString(humidity_exposure.getPercentHumidity()));
         setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
         setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
+
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String humidity = dataSnapshot.getValue(String.class);
+
+                //humidity_exposure = new Humidity(Double.parseDouble(humidity));
+                humidityExposureValue.setText(humidity);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         //Handle Updates to the Min and Max Humidity Exposure Values
         setMin_MaxHumidity.setOnClickListener(new View.OnClickListener(){
