@@ -59,7 +59,7 @@ public class TemperatureDisplay extends AppCompatActivity {
                 temperatureRange.setMinRange(newRange.getMinRange());
                 temperatureRange.setMaxRange(newRange.getMaxRange());
             }
-            if (!temperatureRange.isRangeSet())  {
+            else{
                 minimumValue.setText("Min");
                 maximumValue.setText("Max");
                 temperatureRange.resetRange();
