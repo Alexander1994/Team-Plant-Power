@@ -3,6 +3,8 @@ package com.teamplantpower.team_plant_power;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Samantha on 2017-07-04.
@@ -148,6 +150,20 @@ public class Range implements Serializable {
             return true;
         else
             return false;
+    }
+
+    /**
+     * Convert object to hashmap
+     * @return A hashmap
+     */
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("type", type);
+        result.put("minRange", minRange);
+        result.put("maxRange", maxRange);
+
+        return result;
     }
 
 
