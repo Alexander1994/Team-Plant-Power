@@ -15,7 +15,7 @@ android:
     #- sys-img-armeabi-v7a-android-25
 
 script:
-    - ./gradlew build #connectedCheck
+    - ./gradlew test #connectedCheck
 
 before_install:
     - chmod +x gradlew

@@ -8,8 +8,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.teamplantpower.team_plant_power.Database;
-import com.teamplantpower.team_plant_power.HumidityMeasure;
+import com.teamplantpower.team_plant_power.Humidity;
 import com.teamplantpower.team_plant_power.R;
+import com.teamplantpower.team_plant_power.Range;
+
 
 public class HumidityDisplay extends AppCompatActivity {
     //UI Elements
@@ -21,7 +23,8 @@ public class HumidityDisplay extends AppCompatActivity {
     TextView message;
     //Datebase and Humidity Exposure Objects
     Database data;
-    HumidityMeasure humidity_exposure;
+    Humidity humidity_exposure;
+    Range humidityRange;
 
 
     @Override
@@ -30,7 +33,9 @@ public class HumidityDisplay extends AppCompatActivity {
         setContentView(R.layout.activity_humidity_display);
         //Initialize Database and Humidity Exposure Objects
         data = new Database();
-        humidity_exposure = new HumidityMeasure(data.getHumidityData());
+        humidity_exposure = new Humidity(data.getHumidityData());
+        humidityRange = new Range("humidity", 0,100);
+
         //Initialze UI elements
         humidityExposureValue = (TextView) findViewById(R.id.humidityExposureValue);
         setMinHumidity = (EditText) findViewById(R.id.setMinHumidity);
@@ -38,25 +43,25 @@ public class HumidityDisplay extends AppCompatActivity {
         setMin_MaxHumidity = (Button) findViewById(R.id.setHumidity);
         message = (TextView) findViewById(R.id.message);
         //Display Current Humidity Exposure Values on UI
-        humidityExposureValue.setText(Double.toString(humidity_exposure.getHumidity()));
-        setMinHumidity.setText(Double.toString(humidity_exposure.getMinHumidity()));
-        setMaxHumidity.setText(Double.toString(humidity_exposure.getMaxHumidity()));
+        humidityExposureValue.setText(Double.toString(humidity_exposure.getPercentHumidity()));
+        setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
+        setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
 
         //Handle Updates to the Min and Max Humidity Exposure Values
         setMin_MaxHumidity.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                humidity_exposure.setMinHumidity(Double.parseDouble(setMinHumidity.getText().toString()));
-                humidity_exposure.setMaxHumidity(Double.parseDouble(setMaxHumidity.getText().toString()));
+                humidityRange.setMinRange(Double.parseDouble(setMinHumidity.getText().toString()));
+                humidityRange.setMaxRange(Double.parseDouble(setMaxHumidity.getText().toString()));
                 //If the range provided by the user is not valid reset to default range
-                if (!humidity_exposure.validateHumidityRange()) {
-                    humidity_exposure.setMinHumidity(0.0);
-                    humidity_exposure.setMaxHumidity(100.0);
-                    setMinHumidity.setText(Double.toString(humidity_exposure.getMinHumidity()));
-                    setMaxHumidity.setText(Double.toString(humidity_exposure.getMaxHumidity()));
+                if (!humidityRange.validateRange()) {
+                    humidityRange.setMinRange(0.0);
+                    humidityRange.setMaxRange(100.0);
+                    setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
+                    setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
                 }
                 //Display a message depending to inform user if humidity exposure in within the desired range
-                if (humidity_exposure.checkHumidityInRange()) {
+                if (humidityRange.isInRange(humidity_exposure.getPercentHumidity())) {
                     message.setText("Humidity Exposure in Greenhouse OK");
                 } else {
                     message.setText("WARNING! Humidity Exposure in Greenhouse NOT OK!");
