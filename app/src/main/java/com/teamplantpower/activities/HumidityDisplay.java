@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,8 +20,8 @@ import com.teamplantpower.team_plant_power.Range;
 
 
 public class HumidityDisplay extends AppCompatActivity {
-    //UI Elements
     private static String TAG = "HumidityDisplay";
+    //UI Elements
     TextView humidityExposureValue;
     Button refreshHumidityExposure;
     EditText setMinHumidity;
@@ -31,9 +32,9 @@ public class HumidityDisplay extends AppCompatActivity {
     Database data;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
     DatabaseReference ref = db.getReference("currentHumidity");
+    DatabaseReference ref2;
     Humidity humidity_exposure;
     Range humidityRange;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +55,22 @@ public class HumidityDisplay extends AppCompatActivity {
         setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
         setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
 
-
+        //Retrieve updated humidity values from database
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String humidity = dataSnapshot.getValue(String.class);
-
-                //humidity_exposure = new Humidity(Double.parseDouble(humidity));
+                double value = Double.parseDouble(humidity.replaceAll("[^\\d.]", ""));
+                humidity_exposure.setPercentHumidity(value);
                 humidityExposureValue.setText(humidity);
-
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-
-
 
         //Handle Updates to the Min and Max Humidity Exposure Values
         setMin_MaxHumidity.setOnClickListener(new View.OnClickListener(){
@@ -86,6 +85,9 @@ public class HumidityDisplay extends AppCompatActivity {
                     setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
                     setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
                 }
+                ref2 = db.getReference("range");
+
+                ref2.child(humidityRange.getType()).setValue(humidityRange);
                 //Display a message depending to inform user if humidity exposure in within the desired range
                 if (humidityRange.isInRange(humidity_exposure.getPercentHumidity())) {
                     message.setText("Humidity Exposure in Greenhouse OK");
