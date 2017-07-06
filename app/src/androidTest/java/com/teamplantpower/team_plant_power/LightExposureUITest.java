@@ -44,7 +44,7 @@ public class LightExposureUITest {
 
         ViewInteraction appCompatEditText1 = onView(
                 allOf(withId(R.id.setMinLight), isDisplayed()));
-        appCompatEditText1.perform(replaceText("0.000001"), closeSoftKeyboard());
+        appCompatEditText1.perform(replaceText("0.000000"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.setLight), isDisplayed()));
@@ -55,7 +55,7 @@ public class LightExposureUITest {
         textView.check(matches(withText("Light Exposure in Greenhouse OK")));
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.setMinLight), isDisplayed()));
+                allOf(withId(R.id.setMaxLight), isDisplayed()));
         appCompatEditText2.perform(replaceText("100.00000"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton3 = onView(
@@ -64,7 +64,7 @@ public class LightExposureUITest {
 
         ViewInteraction textView2 = onView(
                 allOf(withId(R.id.message), isDisplayed()));
-        textView2.check(matches(withText("WARNING! Light Exposure in Greenhouse NOT OK!")));
+        textView2.check(matches(withText("Light Exposure in Greenhouse OK")));
 
         ViewInteraction appCompatEditText3 = onView(
                 allOf(withId(R.id.setMinLight), isDisplayed()));

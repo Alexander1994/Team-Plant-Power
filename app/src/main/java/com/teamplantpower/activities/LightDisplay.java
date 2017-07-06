@@ -35,8 +35,7 @@ public class LightDisplay extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("currentLight");
-
-
+    DatabaseReference myRef2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class LightDisplay extends AppCompatActivity {
         //Initialize Database and Light Exposure Objects
         data = new Database();
         light_exposure = new Light(data.getLightData());
-        lightRange = new Range("humidity", 0,100);//default values
+        lightRange = new Range("light", 0,100);
 
         //Initialze UI elements
         lightExposureValue = (TextView) findViewById(R.id.lightExposureValue);
@@ -54,16 +53,19 @@ public class LightDisplay extends AppCompatActivity {
         setMin_MaxLight = (Button) findViewById(R.id.setLight);
         message = (TextView) findViewById(R.id.message);
         //Display Current Light Exposure Values on UI
-// Read from the database
 
+        // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                Log.d(TAG, "Value is: " + value);
-                lightExposureValue.setText(value);
+                String light = dataSnapshot.getValue(String.class);
+                //Log.d(TAG, "Value is: " + value);
+                double value = Double.parseDouble(light.replaceAll("[^\\d.]", ""));
+                light_exposure.setPercentLight(value);
+
+                lightExposureValue.setText(light);
 
             }
 
@@ -91,6 +93,9 @@ public class LightDisplay extends AppCompatActivity {
                     setMinLight.setText(Double.toString(lightRange.getMinRange()));
                     setMaxLight.setText(Double.toString(lightRange.getMaxRange()));
                 }
+                myRef2 = database.getReference("range");
+                myRef2.child(lightRange.getType()).setValue(lightRange);
+
                 //Display a message depending to inform user if light exposure in within the desired range
                 if (lightRange.isInRange(light_exposure.getPercentLight())) {
                     message.setText("Light Exposure in Greenhouse OK");
