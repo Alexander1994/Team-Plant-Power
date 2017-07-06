@@ -102,7 +102,6 @@ public class TemperatureDisplay extends AppCompatActivity {
      * @param v The current view
      */
     public void refreshValues(View v) {
-        Database db = new Database();
         celciusValue = (TextView) findViewById(R.id.celciusValue);
         farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
 
