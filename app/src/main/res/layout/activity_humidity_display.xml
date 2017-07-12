@@ -49,15 +49,6 @@
         android:layout_marginRight="187dp"
         app:layout_constraintRight_toRightOf="parent" />
 
-    <Button
-        android:id="@+id/refreshHumidity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="123dp"
-        android:text="@string/button_refresh"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/setMaxHumidity"
@@ -92,6 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="373dp"
         android:text="@string/button_set"
+        android:onClick="setRange"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

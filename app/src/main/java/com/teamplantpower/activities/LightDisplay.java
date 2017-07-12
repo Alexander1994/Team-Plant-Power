@@ -1,5 +1,7 @@
 package com.teamplantpower.activities;
 
+
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,99 +15,117 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.Light;
 import com.teamplantpower.team_plant_power.R;
 import com.teamplantpower.team_plant_power.Range;
 
 
-public class LightDisplay extends AppCompatActivity {
-    private static final String TAG = "LightDisplay";
-    //UI Elements
-    TextView lightExposureValue;
-    Button refreshLightExposure;
-    EditText setMinLight;
-    EditText setMaxLight;
-    Button setMin_MaxLight;
-    TextView message;
-    //Datebase and Light Exposure Objects
-    Database data;
-    Light light_exposure;
-    Range lightRange;
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("currentLight");
-    DatabaseReference myRef2;
+ public class LightDisplay extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_light_display);
-        //Initialize Database and Light Exposure Objects
-        data = new Database();
-        light_exposure = new Light(data.getLightData());
-        lightRange = new Range("light", 0,100);
+ private Light lightUI = new Light();
+ Range lightRange = new Range("light", 0, 100);
+ FirebaseDatabase database = FirebaseDatabase.getInstance();
+ DatabaseReference firebaseReference;
 
-        //Initialze UI elements
-        lightExposureValue = (TextView) findViewById(R.id.lightExposureValue);
-        setMinLight = (EditText) findViewById(R.id.setMinLight);
-        setMaxLight = (EditText) findViewById(R.id.setMaxLight);
-        setMin_MaxLight = (Button) findViewById(R.id.setLight);
-        message = (TextView) findViewById(R.id.message);
-        //Display Current Light Exposure Values on UI
+ TextView lightExposureValue;
+ EditText minimumValue;
+ EditText maximumValue;
 
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String light = dataSnapshot.getValue(String.class);
-                //Log.d(TAG, "Value is: " + value);
-                double value = Double.parseDouble(light.replaceAll("[^\\d.]", ""));
-                light_exposure.setPercentLight(value);
-
-                lightExposureValue.setText(light);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        lightExposureValue.setText(Double.toString(light_exposure.getPercentLight()));
-        setMinLight.setText(Double.toString(lightRange.getMinRange()));
-        setMaxLight.setText(Double.toString(lightRange.getMaxRange()));
-
-        //Handle Updates to the Min and Max Light Exposure Values
-        setMin_MaxLight.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                lightRange.setMinRange(Double.parseDouble(setMinLight.getText().toString()));
-                lightRange.setMaxRange(Double.parseDouble(setMaxLight.getText().toString()));
-                //If the range provided by the user is not valid reset to default range
-                if (!lightRange.validateRange()) {
-                    lightRange.setMinRange(0.0);
-                    lightRange.setMaxRange(100.0);
-                    setMinLight.setText(Double.toString(lightRange.getMinRange()));
-                    setMaxLight.setText(Double.toString(lightRange.getMaxRange()));
-                }
-                myRef2 = database.getReference("range");
-                myRef2.child(lightRange.getType()).setValue(lightRange);
-
-                //Display a message depending to inform user if light exposure in within the desired range
-                if (lightRange.isInRange(light_exposure.getPercentLight())) {
-                    message.setText("Light Exposure in Greenhouse OK");
-                } else {
-                    message.setText("WARNING! Light Exposure in Greenhouse NOT OK!");
-
-                }
-            }
+ @Override
+ protected void onCreate(Bundle savedInstanceState) {
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_light_display);
+  lightExposureValue = (TextView) findViewById(R.id.lightExposureValue);
+  minimumValue = (EditText) findViewById(R.id.setMinLight);
+  maximumValue = (EditText) findViewById(R.id.setMaxLight);
 
 
-        });
+  //get range
+  firebaseReference = database.getReference("range/light");
+  firebaseReference.addValueEventListener(new ValueEventListener() {
+   @Override
+   public void onDataChange(DataSnapshot dataSnapshot) {
+    // This method is called once with the initial value and again
+    // whenever data at this location is updated.
+    lightRange = dataSnapshot.getValue(Range.class);
+    minimumValue.setText("" + lightRange.getMinRange());
+    maximumValue.setText("" + lightRange.getMaxRange());
+
+
+   }
+
+   @Override
+   public void onCancelled(DatabaseError error) {
+    // Failed to read value
+    //Log.w(TAG, "Failed to read value.", error.toException());
+   }
+  });
+
+
+  //get light
+  firebaseReference = database.getReference("currentLight");
+  firebaseReference.addValueEventListener(new ValueEventListener() {
+   @Override
+   public void onDataChange(DataSnapshot dataSnapshot) {
+    // This method is called once with the initial value and again
+    // whenever data at this location is updated.
+    String value = dataSnapshot.getValue(String.class);
+    //remove any characters like letters or symbols
+    double lightx = Double.parseDouble(value.replaceAll("[^\\d.]", ""));
+    lightUI.setPercentLight(lightx);
+    lightExposureValue.setText("" + lightUI.getPercentLight());
+
+    checkInRange();//must go here otherwise will check before data is in
+
+   }
+
+
+
+   @Override
+   public void onCancelled(DatabaseError error) {
+    // Failed to read value
+    //Log.w(TAG, "Failed to read value.", error.toException());
+   }
+  });
+ }
+
+
+ public void setRange(View v) {
+ minimumValue = (EditText) findViewById(R.id.setMinLight);
+ maximumValue = (EditText) findViewById(R.id.setMaxLight);
+
+ String maxString = maximumValue.getText().toString();
+ String minString = minimumValue.getText().toString();
+
+ if (!maxString.equals("Max") && !minString.equals("Min")) {
+ Range newRange = new Range("Light", Double.parseDouble(minString), Double.parseDouble(maxString));
+ if(newRange.validateRange()){
+ lightRange.setMinRange(newRange.getMinRange());
+ lightRange.setMaxRange(newRange.getMaxRange());
+ }
+ else{
+ minimumValue.setText("Min");
+ maximumValue.setText("Max");
+ lightRange.resetRange();
+ }
+ firebaseReference = database.getReference("range");
+ firebaseReference.child(lightRange.getType()).setValue(lightRange);
+
+ }
+ checkInRange();
+ }
+
+
+public void checkInRange(){
+    if (lightRange.isRangeSet() && !lightRange.isInRange(lightUI.getPercentLight())) {
+ lightExposureValue.setTextColor(Color.parseColor("#FF0000"));
+
+    } else {
+ lightExposureValue.setTextColor(Color.parseColor("#000000"));
+
     }
+}
 }
