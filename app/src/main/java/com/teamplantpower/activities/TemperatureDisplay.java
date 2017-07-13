@@ -13,8 +13,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.google.firebase.database.ValueEventListener;
+
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.R;
 import com.teamplantpower.team_plant_power.Range;
@@ -40,6 +40,7 @@ public class TemperatureDisplay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_temperature_display);
         celciusValue = (TextView) findViewById(R.id.celciusValue);
         farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
@@ -97,40 +98,7 @@ public class TemperatureDisplay extends AppCompatActivity {
 
     }
 
-    /**
-     * Run when refresh button tapped
-     * @param v The current view
-     */
-    public void refreshValues(View v) {
-        celciusValue = (TextView) findViewById(R.id.celciusValue);
-        farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
 
-        firebaseReference = database.getReference("currentTemperature");
-
-        firebaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                //remove any characters like letters or symbols
-                double temp = Double.parseDouble(value.replaceAll("[^\\d.]", ""));
-                temperatureUI.setCelciusValue(temp);
-
-                celciusValue.setText("" + temperatureUI.getCelciusValue());
-                farenheitValue.setText("" +temperatureUI.getFarenheitValue());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        checkInRange();
-    }
 
     /**
      * Set the new min and max inputs

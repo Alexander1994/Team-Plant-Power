@@ -33,6 +33,10 @@ public class Light implements Serializable {
         percentLight = light;
 
     }
+    public Light() {
+        lID = "";
+        percentLight = Double.NaN;
+    }
 
     //Getters******************************************************************
     /**
