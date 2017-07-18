@@ -18,6 +18,8 @@ public class Message implements Serializable {
     public String displayDate;
     public String name;
     public String message;
+    public static final String DBMessageListKey = "Messages";
+
 
     /**
      * Default constructor required for calls to DataSnapshot.getValue
