@@ -32,18 +32,22 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class TemperatureUITest {
+public class LightUITest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void tEMPTEST() {
+    public void lightTest() {
+
 
         ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.temperatureButton), isDisplayed()));
+                allOf(withId(R.id.humidityButton), isDisplayed()));
         appCompatButton.perform(click());
 
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
         try {
             Thread.sleep(6000);
         } catch (InterruptedException e) {
@@ -51,27 +55,34 @@ public class TemperatureUITest {
         }
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.setMinTemp), isDisplayed()));
-        appCompatEditText.perform(replaceText("10"), closeSoftKeyboard());
+                allOf(withId(R.id.setMinHumidity), isDisplayed()));
+        appCompatEditText.perform(click());
+
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.setMaxTemp), isDisplayed()));
-        appCompatEditText2.perform(replaceText("80"), closeSoftKeyboard());
+                allOf(withId(R.id.setMinHumidity), isDisplayed()));
+        appCompatEditText2.perform(replaceText("0"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.setMaxHumidity), isDisplayed()));
+        appCompatEditText3.perform(replaceText("99"), closeSoftKeyboard());
+
+
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.setTemperature), isDisplayed()));
+                allOf(withId(R.id.setHumidity), isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.setMinTemp), isDisplayed()));
-        editText.check(matches(withText("10.0")));
+                allOf(withId(R.id.setMinHumidity),isDisplayed()));
+        editText.check(matches(withText("0.0")));
 
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.setMaxTemp), isDisplayed()));
-        editText2.check(matches(withText("80.0")));
+                allOf(withId(R.id.setMaxHumidity),isDisplayed()));
+        editText2.check(matches(withText("99.0")));
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.celciusValue), isDisplayed()));
+                allOf(withId(R.id.humidityExposureValue),isDisplayed()));
         textView.check(matches(isDisplayed()));
 
     }

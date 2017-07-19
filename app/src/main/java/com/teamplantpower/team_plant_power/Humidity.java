@@ -17,13 +17,15 @@ public class Humidity implements Serializable {
 
     /**
      * The constructor
-     * @param id   A datestamp string, the primary key.
-     * @param h A humidity to set
+     * @param hID   A datestamp string, the primary key.
+     * @param percentHumidity A humidity to set
      */
-    public Humidity(String id, double h){
-        hID = id;
-        percentHumidity = h;
+    public Humidity(String hID, double percentHumidity) {
+        this.hID = hID;
+        this.percentHumidity = percentHumidity;
     }
+
+
 
     /**
      * The default constructor
@@ -32,6 +34,10 @@ public class Humidity implements Serializable {
     public Humidity(double h){
         String hID = "";
         percentHumidity = h;
+    }
+    public Humidity() {
+        hID = "";
+        percentHumidity = Double.NaN;
     }
 
 
