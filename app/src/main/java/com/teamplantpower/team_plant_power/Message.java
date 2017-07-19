@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class Message implements Serializable {
 
-    public String displayDate;
     public String name;
     public String message;
     public static final String DBMessageListKey = "Messages";
@@ -28,14 +27,12 @@ public class Message implements Serializable {
 
     /**
      * Constructors for instance of a message to be submitted to firebase.
-     * @param displayDate
      * @param name
      * @param message
      */
-    public Message(String displayDate, String name, String message){
+    public Message(String name, String message){
         this.name = name;
         this.message = message;
-        this.displayDate = displayDate;
     }
 
     /**
@@ -46,10 +43,24 @@ public class Message implements Serializable {
     @Exclude
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
-        result.put("displayDate", displayDate);
         result.put("name", name);
         result.put("message", message);
         return result;
     }
-}
 
+    /**
+     * getter for message
+     * @return
+     */
+    public String getMessage() {
+        return message;
+    }
+
+    /**
+     * getter for name
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+}
