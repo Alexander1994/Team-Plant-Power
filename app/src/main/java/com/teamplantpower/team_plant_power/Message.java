@@ -50,7 +50,7 @@ public class Message implements Serializable {
 
     /**
      * getter for message
-     * @return
+     * @return the text in the message
      */
     public String getMessage() {
         return message;
@@ -58,7 +58,7 @@ public class Message implements Serializable {
 
     /**
      * getter for name
-     * @return
+     * @return The users name as a string
      */
     public String getName() {
         return name;
