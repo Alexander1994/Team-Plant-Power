@@ -47,7 +47,7 @@ import static org.hamcrest.Matchers.allOf;
         public void HumidityUITest() {
 
             ViewInteraction appCompatButton = onView(
-                    allOf(withId(R.id.messageBoardButton), isDisplayed()));
+                    allOf(withId(R.id.button2), isDisplayed()));
             appCompatButton.perform(click());
 
             ViewInteraction appCompatEditText1 = onView(
