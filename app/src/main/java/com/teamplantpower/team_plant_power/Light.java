@@ -11,9 +11,26 @@ import java.util.Map;
  */
 
 public class Light implements Serializable {
-    String lID;
-    double percentLight;
+    public String lID;
+    public double percentLight;
 
+
+    /**
+     * The default constructor
+     */
+    public Light(){
+        lID = "";
+        percentLight = Double.NaN;
+    }
+    /**
+     * Constructor to set light
+     * @param light the light to set
+     */
+    public Light(double light){
+        lID = "";
+        percentLight = light;
+
+    }
     /**
      * Constructor that sets the light and the id.
      * @param lID The light ID to set, a timestamp.
@@ -24,15 +41,7 @@ public class Light implements Serializable {
         this.percentLight = percentLight;
     }
 
-    /**
-     * Constructor to set light
-     * @param light the light to set
-     */
-    public Light(double light){
-        lID = "";
-        percentLight = light;
 
-    }
 
     //Getters******************************************************************
     /**
@@ -54,6 +63,7 @@ public class Light implements Serializable {
      * Set the light percentage
      * @param light the light value to set
      */
+    @Exclude
     public void setPercentLight(double light){
         percentLight = light;
     }
@@ -62,6 +72,7 @@ public class Light implements Serializable {
      * Set the timestamp id value
      * @param lID the id value to set
      */
+    @Exclude
     public void setlID(String lID) {this.lID = lID;}
 
 
