@@ -24,6 +24,9 @@ import java.util.Date;
 
 import static android.R.attr.data;
 
+/**
+ * Message board for displaying messages shared by Green house users
+ */
 public class MessageBoardActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference messageDbRef = database.getReference(Message.DBMessageListKey);
@@ -39,7 +42,10 @@ public class MessageBoardActivity extends AppCompatActivity {
     private ListView messageListView;
     private FirebaseListAdapter<Message> firebaseAdapter;
 
-
+    /**
+     * Called on the creation of the Message Board activity, iniates login listener and display listener
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +93,10 @@ public class MessageBoardActivity extends AppCompatActivity {
         messageListView.setAdapter(firebaseAdapter);
     }
 
+    /**
+     * Sets name for login or message to send depending on whether the user has set a name or not, View param required for generating key attached to name in DB
+     * @param v
+     */
     public void setInput(View v) {
         String input = enterInput.getText().toString();
         Date date = new Date();
