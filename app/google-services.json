@@ -15,11 +15,115 @@
       },
       "oauth_client": [
         {
+          "client_id": "785086875463-kr432i04snonhkeifku1413nm8vs2aqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamplantpower.team_plant_power",
+            "certificate_hash": "b2bd3eafb82016010b884706c48913421616909d"
+          }
+        },
+        {
+          "client_id": "785086875463-bqj06smqn296rimaq9g58dnedqbhtrol.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamplantpower.team_plant_power",
+            "certificate_hash": "f61e76c2ec76ade9616501312c5b3951eed49dc6"
+          }
+        },
+        {
           "client_id": "785086875463-r0pjq670ajgi1ahvic12jc1oj64dmflr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.teamplantpower.team_plant_power",
             "certificate_hash": "3e97c3b0bc825c53be9771d2c617ae0dd0208946"
+          }
+        },
+        {
+          "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOrpGQCUifpnOlWGMA-7qHGFygzJ4UE1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785086875463:android:0ae97f27fe523be5",
+        "android_client_info": {
+          "package_name": "com.teamplantpower.hexiwearserver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785086875463-rvf3398e78menogrudthv7vjipn7d2dc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.teamplantpower.hexiwearserver",
+            "certificate_hash": "53af7064a2ceb7903b9afd7914d7906da53adebc"
+          }
+        },
+        {
+          "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOrpGQCUifpnOlWGMA-7qHGFygzJ4UE1M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "785086875463-rhq17im54sciut97cctnf938g2du7oct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:785086875463:android:647a0ea43110a502",
+        "android_client_info": {
+          "package_name": "com.wolkabout.hexiwear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "785086875463-i5g7omt06m20ug6isabcpdc0i59o5934.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wolkabout.hexiwear",
+            "certificate_hash": "53af7064a2ceb7903b9afd7914d7906da53adebc"
           }
         },
         {

@@ -1,5 +1,6 @@
 package com.teamplantpower.activities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,6 +90,15 @@ public class HumidityDisplay extends AppCompatActivity {
             }
         });
     }
+    /**
+     * Run when historical button tapped
+     * @param v The current view
+     */
+    public void openHistorical(View v) {
+        Intent intent = new Intent(this, HistoricalHumidity.class);
+        startActivity(intent);
+
+    }
 
 
     public void setRange(View v) {
@@ -126,6 +136,7 @@ public class HumidityDisplay extends AppCompatActivity {
 
         }
     }
+
 
 
 

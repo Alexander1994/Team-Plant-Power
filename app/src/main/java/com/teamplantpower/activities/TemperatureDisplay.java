@@ -99,7 +99,7 @@ public class TemperatureDisplay extends AppCompatActivity {
     }
 
     /**
-     * Run when refresh button tapped
+     * Run when historical button tapped
      * @param v The current view
      */
     public void openHistorical(View v) {
