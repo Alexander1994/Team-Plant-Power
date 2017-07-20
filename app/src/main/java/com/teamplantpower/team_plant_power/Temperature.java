@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Temperature implements Serializable {
-    private String tID;
-    private double celciusValue;
+    public String tID;
+    public double celciusValue;
 
     /**
      * Default constructor
@@ -35,6 +35,7 @@ public class Temperature implements Serializable {
      * Set the celcius value
      * @param val the celcius value to set
      */
+    @Exclude
     public void setCelciusValue(double val){
         celciusValue = val;
     }
@@ -43,6 +44,7 @@ public class Temperature implements Serializable {
      * Set the timestamp id value
      * @param tID the id value to set
      */
+    @Exclude
     public void settID(String tID) {this.tID = tID;}
 
 
