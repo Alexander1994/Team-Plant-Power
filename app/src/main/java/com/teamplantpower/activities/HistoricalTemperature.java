@@ -12,6 +12,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.teamplantpower.team_plant_power.R;
 import com.teamplantpower.team_plant_power.Temperature;
 
+import java.util.Date;
+
 public class HistoricalTemperature extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference firebaseReference = database.getReference("historicalTemperature");
@@ -30,11 +32,15 @@ public class HistoricalTemperature extends AppCompatActivity {
 
         //Set up the List View
         firebaseAdapter = new FirebaseListAdapter<Temperature>(this, Temperature.class,
-                android.R.layout.simple_list_item_1, firebaseReference) {
+                android.R.layout.two_line_list_item, firebaseReference) {
             @Override
             protected void populateView(View v, Temperature model, int position) {
-                TextView contactName = (TextView)v.findViewById(android.R.id.text1);
-                contactName.setText(model.getCelciusValue()+ "");
+                TextView temperature = (TextView)v.findViewById(android.R.id.text1);
+                temperature.setText(model.getCelciusValue()+ "");
+
+                Date date = new Date(Long.parseLong(model.gettID()));
+                TextView dateField = (TextView)v.findViewById(android.R.id.text2);
+                dateField.setText(date.toString());
             }
         };
         historicalListView.setAdapter(firebaseAdapter);
