@@ -1,6 +1,7 @@
 package com.teamplantpower.activities;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -101,35 +102,10 @@ public class TemperatureDisplay extends AppCompatActivity {
      * Run when refresh button tapped
      * @param v The current view
      */
-    public void refreshValues(View v) {
-        celciusValue = (TextView) findViewById(R.id.celciusValue);
-        farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
+    public void openHistorical(View v) {
+        Intent intent = new Intent(this, HistoricalTemperature.class);
+        startActivity(intent);
 
-        firebaseReference = database.getReference("currentTemperature");
-
-        firebaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                //remove any characters like letters or symbols
-                double temp = Double.parseDouble(value.replaceAll("[^\\d.]", ""));
-                temperatureUI.setCelciusValue(temp);
-
-                celciusValue.setText("" + temperatureUI.getCelciusValue());
-                farenheitValue.setText("" +temperatureUI.getFarenheitValue());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                //Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        checkInRange();
     }
 
     /**
