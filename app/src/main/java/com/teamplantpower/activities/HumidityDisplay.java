@@ -1,5 +1,6 @@
 package com.teamplantpower.activities;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,84 +23,112 @@ import com.teamplantpower.team_plant_power.Range;
 public class HumidityDisplay extends AppCompatActivity {
     private static String TAG = "HumidityDisplay";
     //UI Elements
+    private Humidity humidityUI = new Humidity();
+    Range humidityRange = new Range("humidity", 0, 100);
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference firebaseReference;
+
     TextView humidityExposureValue;
-    Button refreshHumidityExposure;
-    EditText setMinHumidity;
-    EditText setMaxHumidity;
-    Button setMin_MaxHumidity;
-    TextView message;
-    //Datebase and Humidity Exposure Objects
-    Database data;
-    FirebaseDatabase db = FirebaseDatabase.getInstance();
-    DatabaseReference ref = db.getReference("currentHumidity");
-    DatabaseReference ref2;
-    Humidity humidity_exposure;
-    Range humidityRange;
+    EditText minimumValue;
+    EditText maximumValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_humidity_display);
-        //Initialize Database and Humidity Exposure Objects
-        data = new Database();
-        humidity_exposure = new Humidity(data.getHumidityData());
-        //Initialze UI elements
         humidityExposureValue = (TextView) findViewById(R.id.humidityExposureValue);
-        setMinHumidity = (EditText) findViewById(R.id.setMinHumidity);
-        setMaxHumidity = (EditText) findViewById(R.id.setMaxHumidity);
-        setMin_MaxHumidity = (Button) findViewById(R.id.setHumidity);
-        message = (TextView) findViewById(R.id.message);
-        //Display Current Humidity Exposure Values on UI
-        humidityRange = new Range("humidity", 0,100);
-        humidityExposureValue.setText(Double.toString(humidity_exposure.getPercentHumidity()));
-        setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
-        setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
+        minimumValue = (EditText) findViewById(R.id.setMinHumidity);
+        maximumValue = (EditText) findViewById(R.id.setMaxHumidity);
 
-        //Retrieve updated humidity values from database
-        ref.addValueEventListener(new ValueEventListener() {
+
+        //get range
+        firebaseReference = database.getReference("range/humidity");
+        firebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String humidity = dataSnapshot.getValue(String.class);
-                double value = Double.parseDouble(humidity.replaceAll("[^\\d.]", ""));
-                humidity_exposure.setPercentHumidity(value);
-                humidityExposureValue.setText(humidity);
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                humidityRange = dataSnapshot.getValue(Range.class);
+                minimumValue.setText("" + humidityRange.getMinRange());
+                maximumValue.setText("" + humidityRange.getMaxRange());
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                //Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
-        //Handle Updates to the Min and Max Humidity Exposure Values
-        setMin_MaxHumidity.setOnClickListener(new View.OnClickListener(){
+
+        //get light
+        firebaseReference = database.getReference("currentHumidity");
+        firebaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                humidityRange.setMinRange(Double.parseDouble(setMinHumidity.getText().toString()));
-                humidityRange.setMaxRange(Double.parseDouble(setMaxHumidity.getText().toString()));
-                //If the range provided by the user is not valid reset to default range
-                if (!humidityRange.validateRange()) {
-                    humidityRange.setMinRange(0.0);
-                    humidityRange.setMaxRange(100.0);
-                    setMinHumidity.setText(Double.toString(humidityRange.getMinRange()));
-                    setMaxHumidity.setText(Double.toString(humidityRange.getMaxRange()));
-                }
-                ref2 = db.getReference("range");
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                String value = dataSnapshot.getValue(String.class);
+                //remove any characters like letters or symbols
+                double humidityx = Double.parseDouble(value.replaceAll("[^\\d.]", ""));
+                humidityUI.setPercentHumidity(humidityx);
+                humidityExposureValue.setText("" + humidityUI.getPercentHumidity());
 
-                ref2.child(humidityRange.getType()).setValue(humidityRange);
-                //Display a message depending to inform user if humidity exposure in within the desired range
-                if (humidityRange.isInRange(humidity_exposure.getPercentHumidity())) {
-                    message.setText("Humidity Exposure in Greenhouse OK");
-                } else {
-                    message.setText("WARNING! Humidity Exposure in Greenhouse NOT OK!");
+                checkInRange();//must go here otherwise will check before data is in
 
-                }
             }
 
 
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                //Log.w(TAG, "Failed to read value.", error.toException());
+            }
         });
     }
+
+
+    public void setRange(View v) {
+        minimumValue = (EditText) findViewById(R.id.setMinHumidity);
+        maximumValue = (EditText) findViewById(R.id.setMaxHumidity);
+
+        String maxString = maximumValue.getText().toString();
+        String minString = minimumValue.getText().toString();
+
+        if (!maxString.equals("Max") && !minString.equals("Min")) {
+            Range newRange = new Range("Humidity", Double.parseDouble(minString), Double.parseDouble(maxString));
+            if(newRange.validateRange()){
+                humidityRange.setMinRange(newRange.getMinRange());
+                humidityRange.setMaxRange(newRange.getMaxRange());
+            }
+            else{
+                minimumValue.setText("Min");
+                maximumValue.setText("Max");
+                humidityRange.resetRange();
+            }
+            firebaseReference = database.getReference("range");
+            firebaseReference.child(humidityRange.getType()).setValue(humidityRange);
+
+        }
+        checkInRange();
+    }
+
+
+    public void checkInRange(){
+        if (humidityRange.isRangeSet() && !humidityRange.isInRange(humidityUI.getPercentHumidity())) {
+            humidityExposureValue.setTextColor(Color.parseColor("#FF0000"));
+
+        } else {
+            humidityExposureValue.setTextColor(Color.parseColor("#000000"));
+
+        }
+    }
+
+
+
 }
 
 
