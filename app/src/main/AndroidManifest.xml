@@ -56,6 +56,25 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.teamplantpower.activities.TemperatureDisplay" />
         </activity>
+        <activity
+            android:name="com.teamplantpower.activities.HistoricalLight"
+            android:parentActivityName="com.teamplantpower.activities.LightDisplay">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.teamplantpower.activities.LightDisplay" />
+        </activity>
+
+        <activity
+            android:name="com.teamplantpower.activities.HistoricalHumidity"
+            android:parentActivityName="com.teamplantpower.activities.HumidityDisplay">
+
+            <!-- The meta-data tag is required if you support API level 15 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.teamplantpower.activities.HumidityDisplay" />
+        </activity>
     </application>
 
 </manifest>

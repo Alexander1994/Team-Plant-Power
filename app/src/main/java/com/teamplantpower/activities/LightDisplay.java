@@ -1,6 +1,7 @@
 package com.teamplantpower.activities;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -91,7 +92,15 @@ import com.teamplantpower.team_plant_power.Range;
    }
   });
  }
+  /**
+   * Run when historical button tapped
+   * @param v The current view
+   */
+  public void openHistorical(View v) {
+   Intent intent = new Intent(this, HistoricalLight.class);
+   startActivity(intent);
 
+  }
 
  public void setRange(View v) {
  minimumValue = (EditText) findViewById(R.id.setMinLight);
@@ -128,4 +137,5 @@ public void checkInRange(){
 
     }
 }
+
 }
