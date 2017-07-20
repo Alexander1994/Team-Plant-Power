@@ -1,6 +1,7 @@
 package com.teamplantpower.activities;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +14,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
+import com.google.firebase.database.ValueEventListener;
 import com.teamplantpower.team_plant_power.Database;
 import com.teamplantpower.team_plant_power.R;
 import com.teamplantpower.team_plant_power.Range;
@@ -40,7 +41,6 @@ public class TemperatureDisplay extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_temperature_display);
         celciusValue = (TextView) findViewById(R.id.celciusValue);
         farenheitValue = (TextView) findViewById(R.id.fahrenheitValue);
@@ -98,7 +98,15 @@ public class TemperatureDisplay extends AppCompatActivity {
 
     }
 
+    /**
+     * Run when refresh button tapped
+     * @param v The current view
+     */
+    public void openHistorical(View v) {
+        Intent intent = new Intent(this, HistoricalTemperature.class);
+        startActivity(intent);
 
+    }
 
     /**
      * Set the new min and max inputs

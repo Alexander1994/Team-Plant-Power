@@ -11,34 +11,37 @@ import java.util.Map;
  */
 
 public class Humidity implements Serializable {
-    private String hID;
-    private double percentHumidity;
-
-
-    /**
-     * The constructor
-     * @param hID   A datestamp string, the primary key.
-     * @param percentHumidity A humidity to set
-     */
-    public Humidity(String hID, double percentHumidity) {
-        this.hID = hID;
-        this.percentHumidity = percentHumidity;
-    }
-
-
+    public String hID;
+    public double percentHumidity;
 
     /**
      * The default constructor
+     */
+    public Humidity(){
+        String hID = "";
+        percentHumidity = Double.NaN;
+    }
+
+    /**
+     * One argument costructor
      * @param h A humidity to set
      */
     public Humidity(double h){
         String hID = "";
         percentHumidity = h;
     }
-    public Humidity() {
-        hID = "";
-        percentHumidity = Double.NaN;
+
+    /**
+     * The constructor
+     * @param id   A datestamp string, the primary key.
+     * @param h A humidity to set
+     */
+    public Humidity(String id, double h){
+        hID = id;
+        percentHumidity = h;
     }
+
+
 
 
     //Getters******************************************************************
@@ -51,15 +54,6 @@ public class Humidity implements Serializable {
     }
 
     /**
-     * Set
-     * @param hID  The hID to set
-     */
-
-    //Setters******************************************************************
-    public void sethID(String hID) {
-        this.hID = hID;
-    }
-    /**
      * Get the percent Humidity
      * @return  The percent Humidity
      */
@@ -67,18 +61,28 @@ public class Humidity implements Serializable {
         return percentHumidity;
     }
 
+
+    //Setters******************************************************************
+    /**
+     * Set
+     * @param hID  The hID to set
+     */
+    @Exclude
+    public void sethID(String hID) {
+        this.hID = hID;
+    }
+
+
+
     /**
      * Set humidity value
      * @param percentHumidity  The percentHumidity to set
      */
+    @Exclude
     public void setPercentHumidity(double percentHumidity) {
         this.percentHumidity = percentHumidity;
     }
 
-    /**
-     * Method to validate humidity value is >= 0 and <= 100
-     * @return a boolean, true if in range, false otherwise
-     */
 
 
     //Validation******************************************************************
