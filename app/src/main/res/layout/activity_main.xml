@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/humidityButton"
+                android:id="@+id/button2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -33,9 +33,9 @@
                 android:id="@+id/lightButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/humidityButton"
-                android:layout_alignStart="@+id/humidityButton"
-                android:layout_below="@+id/humidityButton"
+                android:layout_alignLeft="@+id/messageBoardButton"
+                android:layout_alignStart="@+id/messageBoardButton"
+                android:layout_below="@+id/messageBoardButton"
                 android:layout_weight="1"
                 android:onClick="loadLight"
                 android:text="Light" />
@@ -51,6 +51,16 @@
                 android:layout_weight="1"
                 android:onClick="loadTemperature"
                 android:text="Temperature" />
+
+            <Button
+                android:id="@+id/messageBoardButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="46dp"
+                android:layout_weight="1"
+                android:onClick="loadMessageBoard"
+                android:text="Message Board" />
         </LinearLayout>
 
     </FrameLayout>

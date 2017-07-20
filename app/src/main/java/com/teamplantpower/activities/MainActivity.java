@@ -16,6 +16,14 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HumidityDisplay.class);
         startActivity(intent);
     }
+    /**
+     * Called when the user taps the Message Board button button
+     * @param view The current view.
+     */
+    public void loadMessageBoard(View view) {
+        Intent intent = new Intent(this, MessageBoardActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * Called when the user taps the Light button

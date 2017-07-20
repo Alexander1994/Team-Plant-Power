@@ -1,4 +1,4 @@
-package com.teamplantpower.team_plant_power;
+package com.teamplantpower.activities;
 
 
 import android.support.test.espresso.ViewInteraction;
@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 
-import com.teamplantpower.activities.MainActivity;
 import com.teamplantpower.team_plant_power.R;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,68 +32,96 @@ import static org.hamcrest.Matchers.allOf;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class HumidityUITest {
+
+/**
+ * Requires Messages & Users references in DB to be empty
+ */
+public class MessageBoardUITest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void humidityTest() {
+    public void messageBoardUITest() {
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        nap();
 
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.messageBoardButton), withText("Message Board"), isDisplayed()));
+        nap();
 
-            ViewInteraction appCompatButton = onView(
-                    allOf(withId(R.id.button2), isDisplayed()));
-            appCompatButton.perform(click());
+        appCompatButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
         // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        nap();
+
+        ViewInteraction appCompatEditText = onView(
+                allOf(withId(R.id.EnterName), isDisplayed()));
+        nap();
+
+        appCompatEditText.perform(replaceText("John"), closeSoftKeyboard());
+
+        nap();
+
+        ViewInteraction appCompatButton2 = onView(
+                allOf(withId(R.id.Submit), isDisplayed()));
+        nap();
+
+        appCompatButton2.perform(click());
+
+        nap();
+
+        ViewInteraction appCompatEditText2 = onView(
+                allOf(withId(R.id.EnterName), isDisplayed()));
+        nap();
+
+        appCompatEditText2.perform(replaceText("Hello world!"), closeSoftKeyboard());
+
+        nap();
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.Submit), isDisplayed()));
+        nap();
+
+        appCompatButton3.perform(click());
+
+        nap();
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.Name), isDisplayed()));
+
+        nap();
+        nap();
+
+        textView.check(matches(withText("John")));
+
+        nap();
+
+        ViewInteraction textView2 = onView(
+                allOf(withId(android.R.id.text1), isDisplayed()));
+        nap();
+        nap();
+
+        textView2.check(matches(withText("John: Hello world!")));
+
+    }
+    private void nap() {
         try {
-            Thread.sleep(6000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.setMinLight), isDisplayed()));
-        appCompatEditText.perform(click());
-
-
-        ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.setMinLight), isDisplayed()));
-        appCompatEditText2.perform(replaceText("0"), closeSoftKeyboard());
-
-
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        appCompatEditText4.perform(replaceText("100"), closeSoftKeyboard());
-
-
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.setLight), isDisplayed()));
-        appCompatButton2.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.setMinLight),isDisplayed()));
-        editText.check(matches(withText("0.0")));
-
-        ViewInteraction editText2 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        editText2.check(matches(withText("100.0")));
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.lightExposureValue), isDisplayed()));
-        textView.check(matches(isDisplayed()));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.lightExposureValue), isDisplayed()));
-        textView2.check(matches(isDisplayed()));
-
+    }
+    private void nap(int d) {
+        try {
+            Thread.sleep(d);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private static Matcher<View> childAtPosition(

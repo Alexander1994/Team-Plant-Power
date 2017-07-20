@@ -47,6 +47,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.teamplantpower.activities.MainActivity" />
         </activity>
+        <activity android:name="com.teamplantpower.activities.MessageBoardActivity"></activity>
         <activity
             android:name="com.teamplantpower.activities.HistoricalTemperature"
             android:parentActivityName="com.teamplantpower.activities.TemperatureDisplay">
@@ -76,5 +77,4 @@
                 android:value="com.teamplantpower.activities.HumidityDisplay" />
         </activity>
     </application>
-
 </manifest>
