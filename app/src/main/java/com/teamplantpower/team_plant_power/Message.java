@@ -5,6 +5,8 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,5 +64,33 @@ public class Message implements Serializable {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * retrieves the full display text for a message
+     * @param dateStr
+     * @return full display text for a message
+     */
+    public String getFullDisplayMessage(String dateStr) {
+        return msgKeyToDisplayStr(dateStr)+ ", "+name+ ": " +message;
+    }
+
+    /**
+     * creates and returns a message key to be used by the DB
+     * @return key for the message in the db
+     */
+    public static String createMsgKey() {
+        Date date = new Date();
+        return ""+date.getTime();
+    }
+
+    /**
+     * converts date.getTime() as a string to the display string for the display
+     * @param dateStr
+     * @return display string for the UI
+     */
+    public static String msgKeyToDisplayStr(String dateStr) {
+        Date d = new Date(Long.valueOf(dateStr));
+        return  (new SimpleDateFormat("MMM dd HH:mm").format(d));
     }
 }

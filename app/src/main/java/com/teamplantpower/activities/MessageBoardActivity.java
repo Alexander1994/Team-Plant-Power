@@ -20,6 +20,7 @@ import com.teamplantpower.team_plant_power.R;
 import com.teamplantpower.team_plant_power.User;
 import com.firebase.ui.database.FirebaseListAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.R.attr.data;
@@ -87,7 +88,8 @@ public class MessageBoardActivity extends AppCompatActivity {
             @Override
             protected void populateView(View v, Message model, int position) {
                 TextView contactName = (TextView)v.findViewById(android.R.id.text1);
-                contactName.setText(model.getName()+ ": " +model.getMessage());
+                String dateStr = firebaseAdapter.getRef(position).getKey();
+                contactName.setText(model.getFullDisplayMessage(dateStr));
             }
         };
         messageListView.setAdapter(firebaseAdapter);
@@ -102,7 +104,7 @@ public class MessageBoardActivity extends AppCompatActivity {
         Date date = new Date();
         if (loggedIn) {
             Message m = new Message(u.getName(), input);
-            messageDbRef.child(""+date.getTime()).setValue(m.toMap());
+            messageDbRef.child(Message.createMsgKey()).setValue(m.toMap());
 
         } else { // add user to DB
             userDbRef.child(User.getId(getApplicationContext())).setValue(input);
