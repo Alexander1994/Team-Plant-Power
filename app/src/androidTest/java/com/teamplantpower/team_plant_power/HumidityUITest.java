@@ -42,7 +42,7 @@ public class HumidityUITest {
 
 
             ViewInteraction appCompatButton = onView(
-                    allOf(withId(R.id.button2), isDisplayed()));
+                    allOf(withId(R.id.humidityButton), isDisplayed()));
             appCompatButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.

@@ -1,5 +1,6 @@
 package com.teamplantpower.activities;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,10 +9,24 @@ import android.view.View;
 import com.teamplantpower.team_plant_power.R;
 
 public class MainActivity extends AppCompatActivity {
+    @Override
+    public ComponentName startService(Intent service) {
+        return super.startService(service);
+    }
+
     /**
      * Called when the user taps the Humidity button
      * @param view The current view.
      */
+
+    public void startNotification(View view){
+
+        Intent intetnt = new Intent(this, MyServiceNotification.class);
+        startService(intetnt);
+    }
+
+
+
     public void loadHumidity(View view) {
         Intent intent = new Intent(this, HumidityDisplay.class);
         startActivity(intent);
@@ -47,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
     }
 
 }
