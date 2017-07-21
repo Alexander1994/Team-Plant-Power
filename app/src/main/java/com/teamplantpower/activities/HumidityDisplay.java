@@ -64,7 +64,7 @@ public class HumidityDisplay extends AppCompatActivity {
         });
 
 
-        //get light
+        //get humidity
         firebaseReference = database.getReference("currentHumidity");
         firebaseReference.addValueEventListener(new ValueEventListener() {
             @Override

@@ -76,5 +76,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.teamplantpower.activities.HumidityDisplay" />
         </activity>
+        <service android:name="com.teamplantpower.activities.MyServiceNotification"></service>
     </application>
 </manifest>
