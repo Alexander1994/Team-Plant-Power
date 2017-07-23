@@ -38,7 +38,7 @@ public class LightExposureUITest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void humidityTest() {
+    public void lightTest() {
 
 
             ViewInteraction appCompatButton = onView(
