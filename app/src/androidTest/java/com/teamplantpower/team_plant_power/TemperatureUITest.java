@@ -38,7 +38,7 @@ public class TemperatureUITest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void tEMPTEST() {
+    public void temperatureTest() {
 
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.temperatureButton), isDisplayed()));

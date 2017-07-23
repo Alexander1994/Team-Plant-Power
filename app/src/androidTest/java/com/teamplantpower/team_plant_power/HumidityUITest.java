@@ -38,12 +38,12 @@ public class HumidityUITest {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void humidityTest() {
+    public void lightTest() {
 
 
-            ViewInteraction appCompatButton = onView(
-                    allOf(withId(R.id.humidityButton), isDisplayed()));
-            appCompatButton.perform(click());
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.humidityButton), isDisplayed()));
+        appCompatButton.perform(click());
 
         // Added a sleep statement to match the app's execution delay.
         // The recommended way to handle such scenarios is to use Espresso idling resources:
@@ -55,44 +55,35 @@ public class HumidityUITest {
         }
 
         ViewInteraction appCompatEditText = onView(
-                allOf(withId(R.id.setMinLight), isDisplayed()));
+                allOf(withId(R.id.setMinHumidity), isDisplayed()));
         appCompatEditText.perform(click());
 
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.setMinLight), isDisplayed()));
+                allOf(withId(R.id.setMinHumidity), isDisplayed()));
         appCompatEditText2.perform(replaceText("0"), closeSoftKeyboard());
 
-
         ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        appCompatEditText4.perform(replaceText("100"), closeSoftKeyboard());
+                allOf(withId(R.id.setMaxHumidity), isDisplayed()));
+        appCompatEditText3.perform(replaceText("99"), closeSoftKeyboard());
 
 
 
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(R.id.setLight), isDisplayed()));
+                allOf(withId(R.id.setHumidity), isDisplayed()));
         appCompatButton2.perform(click());
 
         ViewInteraction editText = onView(
-                allOf(withId(R.id.setMinLight),isDisplayed()));
+                allOf(withId(R.id.setMinHumidity),isDisplayed()));
         editText.check(matches(withText("0.0")));
 
         ViewInteraction editText2 = onView(
-                allOf(withId(R.id.setMaxLight), isDisplayed()));
-        editText2.check(matches(withText("100.0")));
+                allOf(withId(R.id.setMaxHumidity),isDisplayed()));
+        editText2.check(matches(withText("99.0")));
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.lightExposureValue), isDisplayed()));
+                allOf(withId(R.id.humidityExposureValue),isDisplayed()));
         textView.check(matches(isDisplayed()));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.lightExposureValue), isDisplayed()));
-        textView2.check(matches(isDisplayed()));
 
     }
 
