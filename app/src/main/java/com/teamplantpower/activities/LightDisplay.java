@@ -116,9 +116,10 @@ import com.teamplantpower.team_plant_power.Range;
  lightRange.setMaxRange(newRange.getMaxRange());
  }
  else{
- minimumValue.setText("Min");
- maximumValue.setText("Max");
- lightRange.resetRange();
+  lightRange.setMinRange(0);
+  lightRange.setMaxRange(100);
+ minimumValue.setText("0");
+ maximumValue.setText("100");
  }
  firebaseReference = database.getReference("range");
  firebaseReference.child(lightRange.getType()).setValue(lightRange);

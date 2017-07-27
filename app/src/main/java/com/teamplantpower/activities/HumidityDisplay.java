@@ -115,9 +115,10 @@ public class HumidityDisplay extends AppCompatActivity {
                 humidityRange.setMaxRange(newRange.getMaxRange());
             }
             else{
-                minimumValue.setText("Min");
-                maximumValue.setText("Max");
-                humidityRange.resetRange();
+                humidityRange.setMinRange(0);
+                humidityRange.setMaxRange(100);
+                minimumValue.setText("0");
+                maximumValue.setText("100");
             }
             firebaseReference = database.getReference("range");
             firebaseReference.child(humidityRange.getType()).setValue(humidityRange);

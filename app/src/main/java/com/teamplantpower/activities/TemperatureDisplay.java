@@ -126,9 +126,10 @@ public class TemperatureDisplay extends AppCompatActivity {
                 temperatureRange.setMaxRange(newRange.getMaxRange());
             }
             else{
-                minimumValue.setText("Min");
-                maximumValue.setText("Max");
-                temperatureRange.resetRange();
+                temperatureRange.setMinRange(0);
+                temperatureRange.setMaxRange(100);
+                minimumValue.setText("0");
+                maximumValue.setText("100");
             }
             firebaseReference = database.getReference("range");
             firebaseReference.child(temperatureRange.getType()).setValue(temperatureRange);
